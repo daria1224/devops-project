@@ -1,11 +1,15 @@
+from flask import Flask, jsonify, send_from_directory
 import os
 import mysql.connector
-from flask import Flask, jsonify
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=".")
 
 @app.route("/")
 def home():
+    return send_from_directory('.', 'index.html')
+
+@app.route("/api/message")
+def api_message():
     return jsonify({"message": "Hello from Flask + MySQL!"})
 
 @app.route("/notes")
